@@ -17,6 +17,10 @@ contract FundMe {
         addressToFunded[msg.sender] += msg.value;
     }
 
-    // 2. Withdraw funds to owner's account
-    function withdraw() public {}
+    function withdraw() public {
+        for (uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++) {
+            address funder = funders[funderIndex];
+            addressToFunded[funder] = 0;
+        }
+    }
 }
