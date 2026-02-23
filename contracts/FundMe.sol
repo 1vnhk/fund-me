@@ -11,10 +11,10 @@ contract FundMe {
     address[] public funders;
     mapping(address funder => uint256 amount) public addressToFunded;
 
-    address public owner;
+    address public immutable i_owner;
 
     constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function fund() public payable {
@@ -41,7 +41,7 @@ contract FundMe {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Must be owner");
+        require(msg.sender == i_owner, "Must be owner");
         _;
     }
 }
